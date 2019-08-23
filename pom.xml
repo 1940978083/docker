@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -18,9 +18,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
-		<docker.repository.url>registry.cn-hangzhou.aliyuncs.com</docker.repository.url>
-		<docker.repository.namespace>1940978083</docker.repository.namespace>
-		<docker.repository.serverId>test</docker.repository.serverId>
+		<docker.image.prefix>1940978083</docker.image.prefix>
 	</properties>
 
 	<dependencies>
@@ -46,15 +44,9 @@
 				<artifactId>docker-maven-plugin</artifactId>
 				<version>0.4.3</version>
 				<configuration>
-					<forceTags>true</forceTags>
-					<pushImage>true</pushImage>
-					<buildArgs>
-						<JAR_FILE>${project.build.finalName}.jar</JAR_FILE>
-					</buildArgs>
 					<imageName>1940978083/test</imageName>
-					<serverId>${docker.repository.serverId}</serverId>
-					<registryUrl>${docker.repository.url}</registryUrl>
 					<dockerDirectory>${basedir}/src/main/resources</dockerDirectory>
+					<dockerHost>http://106.12.178.119:2375</dockerHost>
 					<resources>
 						<resource>
 							<targetPath>/</targetPath>
@@ -62,8 +54,12 @@
 							<include>${project.build.finalName}.jar</include>
 						</resource>
 					</resources>
+					<serverId>docker-aliyun</serverId>
+					<registryUrl>registry.cn-hangzhou.aliyuncs.com</registryUrl>
+					<pushImage>true</pushImage>
 				</configuration>
 			</plugin>
+
 		</plugins>
 	</build>
 	<repositories>
